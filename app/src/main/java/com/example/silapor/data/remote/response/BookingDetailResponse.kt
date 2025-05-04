@@ -43,6 +43,9 @@ data class DataBookingDetail(
 	@field:SerializedName("nama_penyewa")
 	val namaPenyewa: String,
 
+	@field:SerializedName("nomor_hp")
+	val nomorHp: String,
+
 	@field:SerializedName("nama_lapangan")
 	val namaLapangan: String
 )

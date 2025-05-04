@@ -17,7 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"https://silapor-api-dev.up.railway.app/api\"")
+        buildConfigField("String", "BASE_URL", "\"https://silapor-api-dev.up.railway.app/api/\"")
     }
 
     buildTypes {

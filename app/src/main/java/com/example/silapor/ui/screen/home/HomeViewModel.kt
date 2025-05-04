@@ -2,7 +2,6 @@ package com.example.silapor.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import com.example.silapor.model.City
-import com.example.silapor.model.DummyFieldData.cities
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

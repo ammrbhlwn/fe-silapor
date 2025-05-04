@@ -5,6 +5,7 @@ import com.example.silapor.data.remote.response.BookingResponse
 import com.example.silapor.data.remote.response.FieldDetailResponse
 import com.example.silapor.data.remote.response.FieldResponse
 import com.example.silapor.data.remote.retrofit.ApiService
+import com.example.silapor.data.remote.retrofit.TransactionRequest
 import com.example.silapor.ui.common.UiState
 
 class FieldRepository private constructor(
@@ -65,6 +66,19 @@ class FieldRepository private constructor(
             UiState.Success(response)
         } catch (e: Exception) {
             UiState.Error("Lapangan di kota $kota tidak ditemukan: ${e.message}")
+        }
+    }
+
+    suspend fun getStatusTransaction(nomor: String, booking_trx_id: String): UiState<BookingDetailResponse> {
+        return try {
+            val transactionRequest = TransactionRequest(
+                booking_trx_id = booking_trx_id,
+                nomor = nomor
+            )
+            val response = apiService.getStatusTransaction(transactionRequest)
+            UiState.Success(response)
+        } catch (e: Exception) {
+            UiState.Error("Transaksi tidak ditemukan: ${e.message}")
         }
     }
 

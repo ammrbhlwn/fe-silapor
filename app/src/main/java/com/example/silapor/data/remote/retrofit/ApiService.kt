@@ -5,9 +5,16 @@ import com.example.silapor.data.remote.response.BookingResponse
 import com.example.silapor.data.remote.response.FieldDetailResponse
 import com.example.silapor.data.remote.response.FieldResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+
+data class TransactionRequest(
+    val booking_trx_id: String,
+    val nomor: String
+)
 
 interface ApiService {
     @GET("list/lapangan/futsal")
@@ -35,5 +42,10 @@ interface ApiService {
     @GET("user/booking/{id}")
     suspend fun getDetailBooking(
         @Path("id") id: Int
+    ): BookingDetailResponse
+
+    @POST("user/check/booking")
+    suspend fun getStatusTransaction(
+        @Body request: TransactionRequest
     ): BookingDetailResponse
 }

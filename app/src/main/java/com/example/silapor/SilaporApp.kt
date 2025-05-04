@@ -1,6 +1,5 @@
 package com.example.silapor
 
-import StatusTransaksiScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -30,10 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.silapor.ui.screen.booking.BookingScreen
 import com.example.silapor.ui.screen.bookingDetail.BookingDetailScreen
-import com.example.silapor.ui.screen.fieldDetail.FieldDetailScreen
 import com.example.silapor.ui.screen.fieldList.FieldListScreen
+import com.example.silapor.ui.screen.status.StatusTransaksiScreen
 
 @Composable
 fun SilaporApp(
@@ -59,23 +57,24 @@ fun SilaporApp(
         ) {
             composable(Screen.Home.route) {
                 HomeScreen(
-                    navigateToBooking = { fieldId ->
-                        navController.navigate(Screen.Booking.createRoute(fieldId))
+                    navigateToFieldList = { fieldId ->
+                        navController.navigate(Screen.FieldList.createRoute(fieldId))
                     }
                 )
             }
             composable(
-                route = Screen.Booking.route,
+                route = Screen.FieldList.route,
                 arguments = listOf(navArgument("sportType") { type = NavType.StringType })
             ) { backStackEntry ->
                 val sportType = backStackEntry.arguments?.getString("sportType") ?: ""
-                BookingScreen(
+                FieldListScreen(
                     sportType = sportType,
                     navigateToDetail = { fieldId ->
                         navController.navigate(Screen.BookingDetail.createRoute(fieldId))
                     }
                 )
             }
+
             composable(Screen.StatusTransaksi.route) {
                 StatusTransaksiScreen()
             }

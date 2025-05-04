@@ -1,21 +1,18 @@
-import androidx.compose.foundation.layout.Arrangement
+package com.example.silapor.ui.screen.status
+
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,12 +22,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.silapor.di.Injection
+import com.example.silapor.ui.ViewModelFactory
+import com.example.silapor.ui.common.UiState
+import com.example.silapor.ui.components.BookingTransactionCard
+import com.example.silapor.ui.theme.SilaporTheme
 
 @Composable
-fun StatusTransaksiScreen() {
+fun StatusTransaksiScreen(
+    modifier: Modifier = Modifier,
+    viewModel: StatusTransaksiViewModel = viewModel(
+        factory = ViewModelFactory(Injection.provideRepository())
+    ),
+) {
     var bookingCode by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
-    var searchResults by remember { mutableStateOf<List<BookingHistory>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(false) }
+
+    val statusState by viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -38,7 +48,7 @@ fun StatusTransaksiScreen() {
             .padding(16.dp)
     ) {
         Text(
-            text = "History",
+            text = "Cek Status Transaksi",
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -66,7 +76,8 @@ fun StatusTransaksiScreen() {
 
         Button(
             onClick = {
-                searchResults = searchBookingHistory(bookingCode, phoneNumber)
+                isLoading = true
+                viewModel.checkTransactionStatus(phoneNumber, bookingCode)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -75,107 +86,35 @@ fun StatusTransaksiScreen() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        if (searchResults.isNotEmpty()) {
-            LazyColumn {
-                items(searchResults) { booking ->
-                    BookingHistoryCard(booking = booking)
-                    Spacer(modifier = Modifier.height(8.dp))
+        when (statusState) {
+            is UiState.Loading -> {
+                if (isLoading) {
+                    Text("Loading...")
                 }
             }
-        } else if (bookingCode.isNotEmpty() || phoneNumber.isNotEmpty()) {
-            Text(
-                text = "Tidak ada hasil ditemukan",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+            is UiState.Success -> {
+                val booking = (statusState as UiState.Success).data
+                BookingTransactionCard(booking = booking)
+                isLoading = false
+            }
+            is UiState.Error -> {
+                Text(
+                    text = (statusState as UiState.Error).error,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                isLoading = false
+            }
         }
 
         Spacer(modifier = Modifier.weight(1f))
-        BottomNavigationBar()
     }
 }
-
-@Composable
-fun BookingHistoryCard(booking: BookingHistory) {
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = booking.date,
-                style = MaterialTheme.typography.bodyMedium
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = booking.venue,
-                style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = booking.activity,
-                style = MaterialTheme.typography.bodyMedium
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = booking.price,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-}
-
-@Composable
-fun BottomNavigationBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        TextButton(onClick = { /* Navigasi ke Home */ }) {
-            Text("Home")
-        }
-        TextButton(onClick = { /* Navigasi ke History */ }) {
-            Text("History")
-        }
-    }
-}
-
-private fun searchBookingHistory(bookingCode: String, phoneNumber: String): List<BookingHistory> {
-    return if (bookingCode.isNotBlank() && phoneNumber.isNotBlank()) {
-        listOf(
-            BookingHistory(
-                date = "02/05/2025",
-                venue = "Elite Futsal",
-                activity = "Disetujui",
-                price = "Rp.150.000"
-            )
-        )
-    } else {
-        emptyList()
-    }
-}
-
-data class BookingHistory(
-    val date: String,
-    val venue: String,
-    val activity: String,
-    val price: String
-)
 
 @Preview(showBackground = true)
 @Composable
-fun HistoryScreenPreview() {
-    MaterialTheme {
+fun StatusTransaksiPreview() {
+    SilaporTheme {
         StatusTransaksiScreen()
     }
 }
