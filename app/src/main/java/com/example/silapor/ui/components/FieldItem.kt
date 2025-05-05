@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
@@ -48,6 +49,9 @@ fun FieldItem(
     fieldCity: String,
     modifier: Modifier = Modifier,
 ) {
+    val openFormatted = fieldTimeOpen.take(5)
+    val closeFormatted = fieldTimeClosed.take(5)
+
     Card (
         modifier = modifier
             .fillMaxWidth()
@@ -61,7 +65,7 @@ fun FieldItem(
         ) {
             AsyncImage(
                 model = fieldImage,
-                contentDescription = null,
+                contentDescription = fieldName,
                 modifier = modifier
                     .fillMaxWidth()
                     .height(160.dp)
@@ -117,7 +121,7 @@ fun FieldItem(
                     Spacer(modifier = modifier.width(4.dp))
 
                     Text(
-                        text = "$fieldTimeOpen - $fieldTimeClosed",
+                        text = "$openFormatted - $closeFormatted",
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 16.sp,

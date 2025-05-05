@@ -44,7 +44,9 @@ fun SilaporApp(
     Scaffold(
         topBar = { SilaporTopAppBar(title = stringResource(R.string.app_name)) },
         bottomBar = {
-            BottomBar(navController)
+            if (currentRoute != Screen.Booking.route) {
+                BottomBar(navController)
+            }
         },
         modifier = Modifier
     ) { innerPadding ->
