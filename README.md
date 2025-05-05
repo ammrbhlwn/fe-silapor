@@ -42,22 +42,22 @@ Berikut merupakan resource yang digunakan pada aplikasi tersebut
   <tr>
     <td>
         <a href="https://developer.android.com/jetpack/compose">
-           <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjC97Z8BResg5dlPqczsRCFhP6zewWX0X0e7fVPG-G7PuUZwwZVsi9OPoqJYkgqT2h0FI95SsmWzVEgpt8b8HAqFiIxZ98TFtY4lE0b8UrtVJ2HrJebRwl6C9DslsQDl9KnBIrdHS6LtkY/s1600/jetpack+compose+icon_RGB.png" alt="Jetpack Compose" width="100">
+           <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjC97Z8BResg5dlPqczsRCFhP6zewWX0X0e7fVPG-G7PuUZwwZVsi9OPoqJYkgqT2h0FI95SsmWzVEgpt8b8HAqFiIxZ98TFtY4lE0b8UrtVJ2HrJebRwl6C9DslsQDl9KnBIrdHS6LtkY/s1600/jetpack+compose+icon_RGB.png" alt="Jetpack Compose" width="250">
         </a>
     </td>
     <td>
         <a href="https://laravel.com">
-           <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" width="100">
+           <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" width="250">
         </a>
     </td>
     <td>
         <a href="https://supabase.com">
-           <img src="https://logowik.com/content/uploads/images/supabase-icon9119.logowik.com.webp" alt="Supabase" width="100">
+           <img src="https://logowik.com/content/uploads/images/supabase-icon9119.logowik.com.webp" alt="Supabase" width="250">
         </a>
     </td>
     <td>
         <a href="https://railway.app">
-          <img src="https://shop.railway.app/cdn/shop/files/railway_1024x.png?v=1622657842" alt="Railway" width="100">
+          <img src="https://shop.railway.app/cdn/shop/files/railway_1024x.png?v=1622657842" alt="Railway" width="250">
         </a>
     </td>
   </tr>
