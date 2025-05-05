@@ -30,6 +30,7 @@ import com.example.silapor.di.Injection
 import com.example.silapor.ui.ViewModelFactory
 import com.example.silapor.ui.common.UiState
 import com.example.silapor.ui.components.BookingTransactionCard
+import com.example.silapor.ui.components.LoaderAnimation
 import com.example.silapor.ui.theme.BluePrimary
 import com.example.silapor.ui.theme.SilaporTheme
 
@@ -100,7 +101,7 @@ fun StatusTransaksiScreen(
         when (statusState) {
             is UiState.Loading -> {
                 if (isLoading) {
-                    Text("Loading...")
+                    LoaderAnimation()
                 }
             }
             is UiState.Success -> {

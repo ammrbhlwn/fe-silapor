@@ -3,10 +3,8 @@ package com.example.silapor.ui.screen.booking
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -52,6 +49,7 @@ import com.example.silapor.ui.components.BookingConfirmationDialog
 import com.example.silapor.ui.components.BookingInputFields
 import com.example.silapor.ui.components.CustomTimePicker
 import com.example.silapor.ui.components.DateTimePickerSection
+import com.example.silapor.ui.components.LoaderAnimation
 import com.example.silapor.ui.components.TotalPrice
 import com.example.silapor.ui.components.UploadImageSection
 import com.example.silapor.ui.components.UploadProofPhotoScreen
@@ -79,7 +77,7 @@ fun BookingScreen(
     viewModel.uiState.collectAsState(initial = UiState.Empty).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
-                Text("Loading....")
+                LoaderAnimation()
             }
             is UiState.Success -> {
                 BookingContent(
@@ -232,12 +230,7 @@ fun BookingContent(
 
         when (bookingResponse) {
             is UiState.Loading -> {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoaderAnimation()
             }
             is UiState.Error -> {
                 Text(

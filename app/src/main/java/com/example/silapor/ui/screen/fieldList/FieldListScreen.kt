@@ -20,6 +20,7 @@ import com.example.silapor.di.Injection
 import com.example.silapor.ui.ViewModelFactory
 import com.example.silapor.ui.common.UiState
 import com.example.silapor.ui.components.FieldItem
+import com.example.silapor.ui.components.LoaderAnimation
 
 @Composable
 fun FieldListScreen(
@@ -37,7 +38,7 @@ fun FieldListScreen(
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
-                Text(text = "Loading")
+                LoaderAnimation()
             }
             is UiState.Success -> {
                 FieldListContent(
