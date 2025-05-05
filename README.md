@@ -10,18 +10,18 @@ kode boking yang dapat digunakan untuk melacak status transaksi.
      <td>Home</td>
      <td>Daftar Lapangan</td>
      <td>Booking Form</td>
+     <td>Kode Booking</td>
   </tr>
   <tr>
     <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Home.jpg" width=250 ></td>
     <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Field.jpg" width=250 ></td>
     <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Booking.jpg" width=250 ></td>
+    <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Code.jpg" width=250 ></td>
   </tr>
    <tr>
-     <td>Kode Booking</td>
      <td>Cek Status Booking</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Code.jpg" width=250 ></td>
     <td><img src="https://github.com/ammrbhlwn/fe-silapor/blob/main/UIUX/Status.jpg" width=250 ></td>
   </tr>
  </table>
