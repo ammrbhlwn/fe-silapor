@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +28,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.silapor.ui.theme.BluePrimary
 
 @Composable
 fun UploadProofPhotoScreen(
@@ -62,9 +65,11 @@ fun UploadProofPhotoScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = BluePrimary),
                 onClick = { launcher.launch("image/*") }
             ) {
-                Text("Pilih Foto")
+                Text("Pilih Foto", fontSize = 16.sp, color = Color.White)
             }
 
             imageUri?.let { uri ->

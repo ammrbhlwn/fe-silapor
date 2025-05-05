@@ -36,7 +36,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -56,6 +55,7 @@ import com.example.silapor.ui.components.DateTimePickerSection
 import com.example.silapor.ui.components.TotalPrice
 import com.example.silapor.ui.components.UploadImageSection
 import com.example.silapor.ui.components.UploadProofPhotoScreen
+import com.example.silapor.ui.theme.BluePrimary
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -72,7 +72,9 @@ fun BookingScreen(
     ),
     navigateBack: () -> Unit,
 ) {
-    viewModel.getFieldDetail(fieldId)
+    LaunchedEffect(fieldId) {
+        viewModel.getFieldDetail(fieldId)
+    }
 
     viewModel.uiState.collectAsState(initial = UiState.Empty).value.let { uiState ->
         when (uiState) {
@@ -180,7 +182,7 @@ fun BookingContent(
                 .fillMaxWidth()
                 .height(40.dp),
             shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0D65A8))
+            colors = ButtonDefaults.buttonColors(containerColor = BluePrimary)
         ) {
             Text(
                 "Cek Harga",
@@ -221,7 +223,7 @@ fun BookingContent(
                 .fillMaxWidth()
                 .height(48.dp),
             shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0D65A8))
+            colors = ButtonDefaults.buttonColors(containerColor = BluePrimary)
         ) {
             Text("Booking Sekarang", fontSize = 16.sp, color = Color.White)
         }

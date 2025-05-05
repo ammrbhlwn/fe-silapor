@@ -32,6 +32,7 @@ import androidx.navigation.navArgument
 import com.example.silapor.ui.screen.booking.BookingScreen
 import com.example.silapor.ui.screen.fieldList.FieldListScreen
 import com.example.silapor.ui.screen.statusTransaction.StatusTransaksiScreen
+import com.example.silapor.ui.theme.BluePrimary
 
 @Composable
 fun SilaporApp(
@@ -107,7 +108,7 @@ fun SilaporTopAppBar(title: String) {
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
+            containerColor = BluePrimary,
             titleContentColor = MaterialTheme.colorScheme.onPrimary
         ),
     )

@@ -37,46 +37,6 @@ class FieldRepository private constructor(
         }
     }
 
-    suspend fun getDetailFields(id: Int) : UiState<FieldDetailResponse> {
-        return try {
-            val response = apiService.getDetailField(id)
-            if (response.isSuccessful && response.body() != null) {
-                UiState.Success(response.body()!!)
-            } else {
-                UiState.Error("Terjadi kesalahan: ${response.code()} ${response.message()}")
-            }
-        } catch (e: Exception) {
-            UiState.Error("Gagal mengambil data lapangan: ${e.message}")
-        }
-    }
-
-    suspend fun getAllBookings(): UiState<BookingResponse> {
-        return try {
-            val response = apiService.getAllBookings()
-            UiState.Success(response)
-        } catch (e: Exception) {
-            UiState.Error("Gagal mengambil data booking: ${e.message}")
-        }
-    }
-
-    suspend fun getDetailBookings(id: Int): UiState<BookingDetailResponse> {
-        return try {
-            val response = apiService.getDetailBooking(id)
-            UiState.Success(response)
-        } catch (e: Exception) {
-            UiState.Error("Gagal mengambil detail booking: ${e.message}")
-        }
-    }
-
-    suspend fun getSearchEvent(kota: String): UiState<FieldResponse> {
-        return try {
-            val response = apiService.getSearchFields(kota)
-            UiState.Success(response)
-        } catch (e: Exception) {
-            UiState.Error("Lapangan di kota $kota tidak ditemukan: ${e.message}")
-        }
-    }
-
     suspend fun getStatusTransaction(nomor: String, booking_trx_id: String): UiState<BookingDetailResponse> {
         return try {
             val transactionRequest = TransactionRequest(

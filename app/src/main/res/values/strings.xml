@@ -2,7 +2,7 @@
     <string name="app_name">Silapor</string>
     <string name="menu_home">Home</string>
     <string name="menu_favorite">Favorite</string>
-    <string name="menu_history">History</string>
+    <string name="menu_history">Booking</string>
     <string name="choose_city">Pilih Kota</string>
     <string name="choose_sport">Pilih Cabang Olahraga</string>
     <string name="search_field">Cari Lapangan</string>

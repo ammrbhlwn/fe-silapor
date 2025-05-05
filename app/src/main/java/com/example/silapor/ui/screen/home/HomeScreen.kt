@@ -3,15 +3,18 @@ package com.example.silapor.ui.screen.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -19,6 +22,7 @@ import com.example.silapor.R
 import com.example.silapor.di.Injection
 import com.example.silapor.ui.ViewModelFactory
 import com.example.silapor.ui.components.SportGrid
+import com.example.silapor.ui.theme.BluePrimary
 
 @Composable
 fun HomeScreen(
@@ -52,7 +56,13 @@ fun HomeContent(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(stringResource(R.string.choose_sport), style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(
+            R.string.choose_sport),
+            style = MaterialTheme.typography.titleLarge
+        )
+
+        Spacer(modifier = Modifier.padding(16.dp))
+
         SportGrid(
             selectedSport = selectedSport,
             onSportSelected = onSportSelected,
@@ -64,7 +74,13 @@ fun HomeContent(
         Button(
             onClick = onSearchClicked,
             enabled = selectedSport != null,
-            modifier = Modifier.width(357.dp)
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = BluePrimary,
+                contentColor = Color.White
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
             Text(stringResource(R.string.search_field))
         }

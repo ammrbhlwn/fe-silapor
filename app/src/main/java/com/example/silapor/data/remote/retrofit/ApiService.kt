@@ -15,9 +15,6 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.io.File
-import java.sql.Time
-import java.util.Date
 
 data class TransactionRequest(
     val booking_trx_id: String,
@@ -28,16 +25,6 @@ data class CheckTotalPriceRequest(
     val lapangan_id: Int,
     val jam_mulai: String,
     val jam_selesai: String
-)
-
-data class CreateBooking(
-    val lapangan_id: Int,
-    val nama: String,
-    val nomor: String,
-    val tanggal_booking: String,
-    val jam_mulai: String,
-    val jam_selesai: String,
-    val bukti_pembayaran: File
 )
 
 interface ApiService {
