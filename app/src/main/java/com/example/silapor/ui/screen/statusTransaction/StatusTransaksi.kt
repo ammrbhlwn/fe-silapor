@@ -105,6 +105,7 @@ fun StatusTransaksiScreen(
                 )
                 isLoading = false
             }
+            is UiState.Empty -> {}
         }
 
         Spacer(modifier = Modifier.weight(1f))

@@ -70,7 +70,7 @@ fun BookingScreen(
 ) {
     viewModel.getFieldDetail(fieldId)
 
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+    viewModel.uiState.collectAsState(initial = UiState.Empty).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
                 Text("Loading....")
@@ -85,6 +85,7 @@ fun BookingScreen(
             is UiState.Error -> {
                 Text("Terjadi kesalahan: ${uiState.error}")
             }
+            is UiState.Empty -> {}
         }
     }
 }
@@ -228,6 +229,7 @@ fun BookingContent(
                 is UiState.Error -> {
                     Text("Gagal cek harga", color = Color.Red)
                 }
+                is UiState.Empty -> {}
             }
         }
 

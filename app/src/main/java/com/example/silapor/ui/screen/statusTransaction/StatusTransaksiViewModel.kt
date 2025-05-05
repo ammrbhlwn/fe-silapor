@@ -28,6 +28,7 @@ class StatusTransaksiViewModel(
                 is UiState.Error -> {
                     _uiState.value = UiState.Error(result.error)
                 }
+                is UiState.Empty -> {}
             }
         }
     }

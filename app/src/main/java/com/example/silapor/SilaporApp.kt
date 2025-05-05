@@ -44,9 +44,7 @@ fun SilaporApp(
     Scaffold(
         topBar = { SilaporTopAppBar(title = stringResource(R.string.app_name)) },
         bottomBar = {
-            if (currentRoute != Screen.DetailField.route) {
-                BottomBar(navController)
-            }
+            BottomBar(navController)
         },
         modifier = Modifier
     ) { innerPadding ->
@@ -69,7 +67,7 @@ fun SilaporApp(
                 val sportType = backStackEntry.arguments?.getString("sportType") ?: ""
                 FieldListScreen(
                     sportType = sportType,
-                    navigateToDetail = { fieldId ->
+                    navigateToBooking = { fieldId ->
                         navController.navigate(Screen.Booking.createRoute(fieldId))
                     }
                 )

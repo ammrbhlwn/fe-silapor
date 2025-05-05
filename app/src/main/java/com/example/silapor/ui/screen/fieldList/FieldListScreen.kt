@@ -28,7 +28,7 @@ fun FieldListScreen(
     viewModel: FieldListViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
-    navigateToDetail: (Int) -> Unit,
+    navigateToBooking: (Int) -> Unit,
 ) {
     LaunchedEffect(sportType) {
         viewModel.getFieldsByType(sportType)
@@ -43,12 +43,13 @@ fun FieldListScreen(
                 FieldListContent(
                     modifier = modifier,
                     fields = uiState.data,
-                    navigateToDetail = navigateToDetail,
+                    navigateToBooking = navigateToBooking,
                 )
             }
             is UiState.Error -> {
                 Text(text = uiState.error)
             }
+            is UiState.Empty -> {}
         }
     }
 }
@@ -57,7 +58,7 @@ fun FieldListScreen(
 fun FieldListContent(
     fields : List<DataField>,
     modifier: Modifier = Modifier,
-    navigateToDetail: (Int) -> Unit,
+    navigateToBooking: (Int) -> Unit,
 ) {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -78,7 +79,7 @@ fun FieldListContent(
                 fieldPrice = data.harga,
                 fieldCity = data.kota,
                 modifier = modifier.clickable {
-                    navigateToDetail(data.id)
+                    navigateToBooking(data.id)
                 }
             )
         }

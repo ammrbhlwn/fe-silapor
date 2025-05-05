@@ -16,19 +16,18 @@ class BookingViewModel (
     private val repository: FieldRepository
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<UiState<FieldDetailResponse>> =
-        MutableStateFlow(UiState.Loading)
+        MutableStateFlow(UiState.Empty)
     val uiState: StateFlow<UiState<FieldDetailResponse>> = _uiState
 
-    private val _totalHarga = MutableStateFlow<UiState<CheckTotalResponse>>(UiState.Loading)
+    private val _totalHarga = MutableStateFlow<UiState<CheckTotalResponse>>(UiState.Empty)
     val totalHarga: StateFlow<UiState<CheckTotalResponse>> = _totalHarga
 
-    private val _bookingResponse = MutableStateFlow<UiState<BookingResponse>>(UiState.Loading)
+    private val _bookingResponse = MutableStateFlow<UiState<BookingResponse>>(UiState.Empty)
     val bookingResponse: StateFlow<UiState<BookingResponse>> = _bookingResponse
 
     fun getFieldDetail(id: Int) {
-        _uiState.value = UiState.Loading
-
         viewModelScope.launch {
+            _uiState.value = UiState.Loading
             _uiState.value = repository.getFieldDetail(id)
         }
     }
