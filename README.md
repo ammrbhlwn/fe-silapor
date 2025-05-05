@@ -34,22 +34,22 @@ Berikut merupakan resource yang digunakan pada aplikasi tersebut
 ## 🎯 TECH STACK
 - **Frontend (Android)**  
   <a href="https://developer.android.com/jetpack/compose">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjC97Z8BResg5dlPqczsRCFhP6zewWX0X0e7fVPG-G7PuUZwwZVsi9OPoqJYkgqT2h0FI95SsmWzVEgpt8b8HAqFiIxZ98TFtY4lE0b8UrtVJ2HrJebRwl6C9DslsQDl9KnBIrdHS6LtkY/s1600/jetpack+compose+icon_RGB.png" alt="Jetpack Compose" height="40">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjC97Z8BResg5dlPqczsRCFhP6zewWX0X0e7fVPG-G7PuUZwwZVsi9OPoqJYkgqT2h0FI95SsmWzVEgpt8b8HAqFiIxZ98TFtY4lE0b8UrtVJ2HrJebRwl6C9DslsQDl9KnBIrdHS6LtkY/s1600/jetpack+compose+icon_RGB.png" alt="Jetpack Compose" height="80">
   </a>
 
 - **Backend Framework**  
   <a href="https://laravel.com">
-    <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" height="40">
+    <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" height="80">
   </a>
 
 - **Database**  
   <a href="https://supabase.com">
-    <img src="https://logowik.com/content/uploads/images/supabase-icon9119.logowik.com.webp" alt="Supabase" height="40">
+    <img src="https://logowik.com/content/uploads/images/supabase-icon9119.logowik.com.webp" alt="Supabase" height="80">
   </a>
 
 - **Deployment Platform**  
   <a href="https://railway.app">
-    <img src="https://railway.app/brand/icon-light.png" alt="Railway" height="40">
+    <img src="https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/h3m0hmstlq9maq7t8tyc" alt="Railway" height="80">
   </a>
 
 ## 🛠️ APPLICATION DEVELOPMENT
