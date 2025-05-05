@@ -1,4 +1,4 @@
-package com.example.silapor.ui.screen.status
+package com.example.silapor.ui.screen.statusTransaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

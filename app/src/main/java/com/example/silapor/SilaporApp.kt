@@ -29,9 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.silapor.ui.screen.bookingDetail.BookingDetailScreen
+import com.example.silapor.ui.screen.booking.BookingScreen
 import com.example.silapor.ui.screen.fieldList.FieldListScreen
-import com.example.silapor.ui.screen.status.StatusTransaksiScreen
+import com.example.silapor.ui.screen.statusTransaction.StatusTransaksiScreen
 
 @Composable
 fun SilaporApp(
@@ -70,7 +70,7 @@ fun SilaporApp(
                 FieldListScreen(
                     sportType = sportType,
                     navigateToDetail = { fieldId ->
-                        navController.navigate(Screen.BookingDetail.createRoute(fieldId))
+                        navController.navigate(Screen.Booking.createRoute(fieldId))
                     }
                 )
             }
@@ -80,11 +80,11 @@ fun SilaporApp(
             }
 
             composable(
-                route = Screen.BookingDetail.route,
+                route = Screen.Booking.route,
                 arguments = listOf(navArgument("fieldId") { type = NavType.IntType }),
             ) {
                 val id = it.arguments?.getInt("fieldId") ?: -1
-                BookingDetailScreen (
+                BookingScreen (
                     fieldId = id,
                     navigateBack = {
                         navController.navigateUp()

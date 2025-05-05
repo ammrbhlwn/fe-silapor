@@ -9,7 +9,7 @@ sealed class Screen(val route: String) {
     data object DetailField : Screen("field/{fieldId}") {
         fun createRoute(fieldId: Int) = "field/$fieldId"
     }
-    data object BookingDetail : Screen("field/{fieldId}") {
+    data object Booking : Screen("field/{fieldId}") {
         fun createRoute(fieldId: Int) = "field/$fieldId"
     }
 }

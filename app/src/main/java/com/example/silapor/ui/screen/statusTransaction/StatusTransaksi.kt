@@ -1,4 +1,4 @@
-package com.example.silapor.ui.screen.status
+package com.example.silapor.ui.screen.statusTransaction
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
