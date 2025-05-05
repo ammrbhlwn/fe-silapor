@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +43,8 @@ fun UploadImageSection(
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Text(selectedImageUri?.lastPathSegment ?: "Pilih Gambar", color = Color.Black)
+        Text(selectedImageUri?.lastPathSegment ?: "Pilih Gambar",
+            color = MaterialTheme.colorScheme.onBackground)
     }
 
     selectedImageUri?.let { uri ->

@@ -25,6 +25,7 @@ import com.example.silapor.ui.navigation.NavigationItem
 import com.example.silapor.ui.navigation.Screen
 import com.example.silapor.ui.screen.home.HomeScreen
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -109,7 +110,7 @@ fun SilaporTopAppBar(title: String) {
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = BluePrimary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary
+            titleContentColor = Color.White
         ),
     )
 }

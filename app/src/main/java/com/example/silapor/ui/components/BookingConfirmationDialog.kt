@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,11 +36,15 @@ fun BookingConfirmationDialog(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var copied = remember { mutableStateOf(false) }
+    val copied = remember { mutableStateOf(false) }
+    val clipboardManager = LocalClipboardManager.current
 
     Dialog(onDismissRequest = onDismiss) {
         Card(
             shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
             modifier = modifier
         ) {
             Column(
@@ -67,6 +74,7 @@ fun BookingConfirmationDialog(
                 Text(
                     text = bookingCode,
                     fontSize = 24.sp,
+                    color = BluePrimary,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                 )
@@ -80,7 +88,10 @@ fun BookingConfirmationDialog(
                         contentColor = BluePrimary
                     ),
                     border = BorderStroke(1.dp, BluePrimary),
-                    onClick = onDismiss,
+                    onClick = {
+                        clipboardManager.setText(AnnotatedString(bookingCode))
+                        copied.value = true
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(if (copied.value) "Berhasil Disalin" else "Salin Kode Booking")

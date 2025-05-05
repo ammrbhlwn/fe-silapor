@@ -11,6 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.silapor.data.remote.response.CheckTotalResponse
 import com.example.silapor.ui.common.UiState
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 fun TotalPrice(
@@ -24,12 +26,17 @@ fun TotalPrice(
 
         when (totalHarga) {
             is UiState.Loading -> Text("menghitung...")
-            is UiState.Success ->
+            is UiState.Success -> {
+                val harga = totalHarga.data.data.totalHarga
+                val formattedHarga = NumberFormat
+                    .getNumberInstance(Locale("id", "ID"))
+                    .format(harga)
                 Text(
-                    "Rp ${totalHarga.data.data.totalHarga}",
+                    "Rp $formattedHarga",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
+            }
             is UiState.Error -> Text("Gagal menghitung harga", color = Color.Red)
             is UiState.Empty -> Text("-", fontSize = 16.sp)
         }

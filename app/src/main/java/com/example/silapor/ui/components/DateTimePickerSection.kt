@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +19,8 @@ fun DateTimePickerSection(
     selectedTimeStart: String,
     selectedTimeEnd: String,
     onDateClick: () -> Unit,
-    onTimeClick: () -> Unit
+    onTimeStartClick: () -> Unit,
+    onTimeEndClick: () -> Unit
 ) {
     OutlinedButton(
         onClick = onDateClick,
@@ -26,28 +28,37 @@ fun DateTimePickerSection(
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Text(selectedDate, color = Color.Black)
+        Text(
+            selectedDate,
+            color = MaterialTheme.colorScheme.onBackground
+        )
     }
 
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(12.dp))
 
     OutlinedButton(
-        onClick = onTimeClick,
+        onClick = onTimeStartClick,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Text(selectedTimeStart, color = Color.Black)
+        Text(
+            selectedTimeStart,
+            color = MaterialTheme.colorScheme.onBackground
+        )
     }
 
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(12.dp))
 
     OutlinedButton(
-        onClick = onTimeClick,
+        onClick = onTimeEndClick,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Text(selectedTimeEnd, color = Color.Black)
+        Text(
+            selectedTimeEnd,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
     }
 }

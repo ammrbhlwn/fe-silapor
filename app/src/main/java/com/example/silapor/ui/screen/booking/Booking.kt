@@ -1,6 +1,7 @@
 package com.example.silapor.ui.screen.booking
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,6 +23,7 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -35,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -94,6 +97,10 @@ fun BookingScreen(
     }
 }
 
+enum class TimeTarget {
+    START, END
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookingContent(
@@ -114,12 +121,37 @@ fun BookingContent(
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
     var file by remember { mutableStateOf<File?>(null) }
 
+    var editingTimeField by remember { mutableStateOf("") }
+    var timePickerTarget by remember { mutableStateOf(TimeTarget.START) }
+
+    val context = LocalContext.current
     val bookingResponse = viewModel.bookingResponse.collectAsState().value
     val totalHarga = viewModel.totalHarga.collectAsState().value
+
+    val isFormValid = nama.isNotBlank() &&
+            nomor.isNotBlank() &&
+            selectedDate != "Pilih Tanggal" &&
+            selectedTimeStart != "Jam Mulai" &&
+            selectedTimeEnd != "Jam Selesai" &&
+            selectedImageUri != null
+
+    val (initialHour) = when (editingTimeField) {
+        "start" -> selectedTimeStart.takeIf { it != "Jam Mulai" }?.split(":")?.let {
+            it[0].toInt() to it[1].toInt()
+        } ?: (8 to 0)
+
+        "end" -> selectedTimeEnd.takeIf { it != "Jam Selesai" }?.split(":")?.let {
+            it[0].toInt() to it[1].toInt()
+        } ?: (8 to 0)
+
+        else -> 8 to 0
+    }
 
     LaunchedEffect(bookingResponse) {
         if (bookingResponse is UiState.Success) {
             showConfirmationDialog = true
+        } else if (bookingResponse is UiState.Error) {
+            Toast.makeText(context, "Gagal booking", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -167,7 +199,14 @@ fun BookingContent(
             onDateClick = {
                 showDatePicker = true
             },
-            onTimeClick = {
+            onTimeStartClick = {
+                timePickerTarget = TimeTarget.START
+                editingTimeField = "start"
+                showTimePicker = true
+            },
+            onTimeEndClick = {
+                timePickerTarget = TimeTarget.END
+                editingTimeField = "end"
                 showTimePicker = true
             }
         )
@@ -217,13 +256,14 @@ fun BookingContent(
                     )
                 }
             },
+            enabled = isFormValid,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = BluePrimary)
         ) {
-            Text("Booking Sekarang", fontSize = 16.sp, color = Color.White)
+            Text("Booking Sekarang", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -285,9 +325,13 @@ fun BookingContent(
 
     if (showTimePicker) {
         CustomTimePicker(
+            initialHour = initialHour,
             onTimeSelected = {
-                if (selectedTimeStart == "Jam Mulai") selectedTimeStart = it
-                else selectedTimeEnd = it
+                if (editingTimeField == "start") {
+                    selectedTimeStart = it
+                } else if (editingTimeField == "end") {
+                    selectedTimeEnd = it
+                }
                 showTimePicker = false
             },
             onDismiss = { showTimePicker = false }

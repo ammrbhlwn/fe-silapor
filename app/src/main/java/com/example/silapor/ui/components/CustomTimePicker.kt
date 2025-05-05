@@ -23,10 +23,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CustomTimePicker(
+    initialHour: Int,
     onTimeSelected: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var hour by remember { mutableStateOf(8) }
+    var hour by remember { mutableStateOf(initialHour) }
     var minute = 0
 
     AlertDialog(

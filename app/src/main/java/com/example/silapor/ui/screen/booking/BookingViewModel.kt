@@ -54,10 +54,9 @@ class BookingViewModel (
         jamSelesai: String,
         buktiPembayaran: File
     ) {
-        _bookingResponse.value = UiState.Loading
-
         viewModelScope.launch {
             try {
+                _bookingResponse.value = UiState.Loading
                 _bookingResponse.value = repository.createBooking(
                     fieldId, nama, nomor, tanggal, jamMulai, jamSelesai, buktiPembayaran
                 )
